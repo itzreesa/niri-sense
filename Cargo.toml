@@ -1,0 +1,18 @@
+[package]
+name = "sense"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+buttplug_client = "11.0.0"
+niri-ipc = "26.4.0"
+tokio = { version ="1.53.1", features = ["rt-multi-thread"]}
+log = "0.4.34"
+anyhow = "1.0.104"
+futures-util = "0.3.34"
+buttplug_core = "11.0.0"
+buttplug_transport_websocket_tungstenite = "11.0.0"
+env_logger = "0.11.11"
+toml = "1.1.5+spec-1.1.0"
+dirs = "6.0.0"
+serde = { version = "1.0.229", features = ["derive"] }
