@@ -13,7 +13,6 @@ integrate your toys with niri!
 </br>
 </p>
 
-![](assets/preview.webm)
 
 ### Quick Start
 Install `niri` and rust... then:  
@@ -21,6 +20,10 @@ Install `niri` and rust... then:
 
 Or download the latest binary from [the releases tab](https://github.com/itzreesa/niri-sense/releases)  
 and put it somewhere in your `PATH`, like `~/.local/bin`
+
+##### preview
+[preview.webm](https://github.com/user-attachments/assets/9f5c33e7-d0d3-436b-a05d-a19e148bcdcc)
+
 ### Usage
 Run `niri-sense` inside a _niri session_ to launch it!  
 You'll need a _buttplug.io_ compatible server, like [Intiface(r) Central](https://intiface.com/)  
@@ -31,6 +34,7 @@ You'll need a _buttplug.io_ compatible server, like [Intiface(r) Central](https:
 - That's it! Try moving around your workspace, you should now _feel_ the app running!
 
 Optionally, you can use `list` and `select` to select between one or all **devices** found.
+
 
 ### Trivia
 I thought of this project while playing _deadlock_, then I jokingly DM'd **oomf** about this idea, because I remembered the lovelock mod that I've seen was popular on twitter. 
