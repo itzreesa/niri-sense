@@ -22,7 +22,7 @@ Or download the latest binary from [the releases tab](https://github.com/itzrees
 and put it somewhere in your `PATH`, like `~/.local/bin`
 
 ##### preview
-[preview.webm](https://github.com/user-attachments/assets/9f5c33e7-d0d3-436b-a05d-a19e148bcdcc)
+https://github.com/user-attachments/assets/2bc8afef-b9cd-4352-86de-3690a452b694
 
 ### Usage
 Run `niri-sense` inside a _niri session_ to launch it!  
