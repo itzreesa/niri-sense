@@ -1,28 +1,30 @@
 use std::io;
 use std::io::Write;
 use std::sync::Arc;
-use log::info;
+use std::time::Duration;
 use tokio::sync::Mutex;
 use crate::integration::Integration;
 
 pub struct Repl {
   integration: Arc<Mutex<Integration>>,
+  running: bool
 }
 
 impl Repl {
   pub fn new(integration: Arc<Mutex<Integration>>) -> Self {
     Self {
-      integration
+      integration,
+      running: true,
     }
   }
 
-  pub(crate) async fn run(&self) {
+  pub(crate) async fn run(&mut self) {
     let mut c = String::new();
     const PS1: &str = "$> ";
 
     println!("type help to see available commands.");
 
-    loop {
+    while self.running {
       c.clear();
 
       print!("{}", PS1);
@@ -35,7 +37,7 @@ impl Repl {
     }
   }
 
-  async fn process_command(&self, cmd: &str) {
+  async fn process_command(&mut self, cmd: &str) {
     match cmd {
       "help" => print_help(),
       "connect" => self._cmd_connect().await,
@@ -48,6 +50,7 @@ impl Repl {
       "stop" => self._cmd_stop().await,
       "pause" => self._cmd_pause().await,
       "reload" => self._cmd_reload().await,
+      "exit" => self._cmd_exit().await,
       _ => println!("invalid command: \"{}\"", cmd)
     }
   }
@@ -105,9 +108,18 @@ impl Repl {
     let mut i = self.integration.lock().await;
     let _ = i.reload_config()  .await;
   }
+  async fn _cmd_exit(&mut self) {
+    self.running = false;
+    let mut i = self.integration.lock().await;
+    let _ = i.exit().await;
+    // i don't want to uh uh uh uh break niri,
+    // cuz quitting with ctrl+c broke it,
+    // unless it's because i'm running it under plasma bwehh
+    tokio::time::sleep(Duration::from_millis(250)).await;
+  }
 }
 
 fn print_help() {
   // lazy bweh :p
-  println!(" - connect - connects to the server\n - disconnect - disconnects from the server\n - scan start - starts device scan\n - scan stop - stops device scan\n - list - lists devices\n - select - select a device\n - test - runs a series of vibration for testing\n - stop - stops all events\n - pause - toggles pause\n - reload - reloads config");
+  println!(" - connect - connects to the server\n - disconnect - disconnects from the server\n - scan start - starts device scan\n - scan stop - stops device scan\n - list - lists devices\n - select - select a device\n - test - runs a series of vibration for testing\n - stop - stops all events\n - pause - toggles pause\n - reload - reloads config\n - exit - exits on next event.");
 }

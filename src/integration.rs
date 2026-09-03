@@ -1,4 +1,3 @@
-use std::any::Any;
 use buttplug_client::{connector::ButtplugRemoteClientConnector, serializer::ButtplugClientJSONSerializer, ButtplugClient, ButtplugClientDevice, ButtplugClientError, ButtplugClientEvent};
 use buttplug_core::errors::ButtplugError;
 use buttplug_transport_websocket_tungstenite::ButtplugWebsocketClientTransport;
@@ -18,6 +17,7 @@ pub struct Integration {
   paused: Mutex<bool>,
   device_selected: Mutex<i8>,
   skip_event_count: u8,
+  pub quit_flag: bool
 }
 
 impl Integration {
@@ -36,24 +36,23 @@ impl Integration {
     println!("connecting to {}", addr);
 
     if let Err(e) = self.client.connect(connector).await {
-      match e {
+      return match e {
         ButtplugClientError::ButtplugConnectorError(error) => {
           error!("can't connect, exiting! {}", error);
-          return Ok(());
+          Ok(())
         }
         ButtplugClientError::ButtplugError(error) => match error {
           ButtplugError::ButtplugHandshakeError(error) => {
             error!("handshake issue, exiting! {}", error);
-            return Ok(());
-
+            Ok(())
           }
           error => {
             error!("error! {}", error);
-            return Ok(());
+            Ok(())
           }
         },
         _ => {
-          return Ok(());
+          Ok(())
         }
       }
     }
@@ -284,7 +283,7 @@ impl Integration {
 
   pub async fn stop_all(&self) {
     println!("stopping all devices");
-    self.client.stop_all_devices().await;
+    let _ = self.client.stop_all_devices().await;
   }
 
   pub async fn select_device(&self, new_id: i8) {
@@ -303,6 +302,11 @@ impl Integration {
     self.config = SenseConfig::load_or_save_default().unwrap();
   }
 
+  pub async fn exit(&mut self) {
+    let _ = self.client.disconnect().await;
+    self.quit_flag = true;
+  }
+
   pub fn new(config: SenseConfig) -> Integration {
     let client = ButtplugClient::new("Niri Sense Client");
 
@@ -311,7 +315,8 @@ impl Integration {
       config,
       paused: Mutex::new(false),
       device_selected: Mutex::new(-1),
-      skip_event_count: 0
+      skip_event_count: 0,
+      quit_flag: false
     }
   }
 }

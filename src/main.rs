@@ -54,6 +54,6 @@ async fn main() {
 
     tokio::time::sleep(Duration::from_millis(50)).await;
 
-    let repl = Repl::new(integration.clone());
+    let mut repl = Repl::new(integration.clone());
     repl.run().await;
 }

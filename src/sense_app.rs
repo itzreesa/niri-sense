@@ -69,6 +69,12 @@ impl SenseApp {
 
       let e = event.unwrap();
       let mut int = self.integration.lock().await;
+      if int.quit_flag {
+        // i could have just changed the self.running flag to false
+        // but ugh this took soooo long,
+        // i don't want to spend any more time.
+        return;
+      }
       int.event_to_integration(e).await;
     }
   }
