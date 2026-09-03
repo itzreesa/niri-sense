@@ -1,12 +1,9 @@
-use std::error::Error;
-use std::path::Path;
 use std::sync::Arc;
 use anyhow::anyhow;
 use niri_ipc;
-use log::{debug, error, info};
-use niri_ipc::{Event, Reply, Request, Response};
+use log::error;
+use niri_ipc::Request;
 use tokio::sync::Mutex;
-use crate::config::SenseConfig;
 use crate::integration::Integration;
 
 pub struct SenseApp {
@@ -42,7 +39,7 @@ impl SenseApp {
     match ev_req {
       Ok(n) => {
         match n {
-          Ok(reply) => { self.running = true; Ok(()) },
+          Ok(_) => { self.running = true; Ok(()) },
           Err(e) => {
             let s = format!("niri error while setting up a stream: {}" ,e);
             error!("{}", s);

@@ -1462,7 +1462,6 @@ dependencies = [
  "futures-util",
  "log",
  "niri-ipc",
- "serde",
  "tokio",
  "toml",
 ]

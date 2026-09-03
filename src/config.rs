@@ -1,11 +1,7 @@
-use std::fs::File;
-use std::path::Path;
-use std::ptr::addr_eq;
 use toml::{Table, Value};
 use dirs;
 use dirs::config_dir;
-use log::{debug, error};
-use serde::Deserialize;
+use log::debug;
 use crate::util::{SenseVibrationLength, SenseVibrationStrength};
 
 #[derive(Clone)]
@@ -130,8 +126,7 @@ cast_stopped = [\"on\", \"low\", \"short\"]
 niri_config_reloaded = [\"off\", \"low\", \"short\"]";
 
   let config_location: String = format!("{}/niri/sense.toml", config_dir().unwrap().into_string().unwrap());
-
-  let res = std::fs::write(config_location, DEFAULT_CONFIG_STR);
+  let _ = std::fs::write(config_location, DEFAULT_CONFIG_STR);
 }
 
 fn deserialize_server(table: Table) -> Option<SenseConfigServer> {
@@ -280,7 +275,7 @@ impl SenseConfig {
     let res = std::fs::read_to_string(config_location.clone());
     match res {
       Ok(str) => content = str,
-      Err(e) => {
+      Err(_) => {
         println!("could not find the config at {}, saving a new one.", config_location);
         dump_default_config();
         return Some(Self::default());

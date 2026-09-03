@@ -34,7 +34,7 @@ async fn main() {
     match env::var(SOCKET_PATH_ENV) {
         Ok(s) => socket = s,
         Err(e) => {
-            error!("couldn't find NIRI_SOCKET in your env! make sure you are running niri! else, set it manually!");
+            error!("couldn't find NIRI_SOCKET in your env! make sure you are running niri! else, set it manually! {}", e);
             exit(1);
         }
     }
