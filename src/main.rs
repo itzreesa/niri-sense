@@ -23,7 +23,7 @@ const VERSION: &str = env!("CARGO_PKG_VERSION");
 async fn main() {
     let mut logger_builder = env_logger::Builder::new();
     logger_builder.filter_level(log::LevelFilter::Error);
-    logger_builder.filter_level(log::LevelFilter::Debug);
+    //logger_builder.filter_level(log::LevelFilter::Debug);
     logger_builder.init();
 
     println!("-- niri sense {}", VERSION);

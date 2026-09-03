@@ -228,7 +228,6 @@ impl Integration {
   async fn _run_mapped_event(&mut self, e: SenseEventConfig, check_for_skip: bool) {
     if check_for_skip && self.config.events.repeated_event_prevention {
       if self.skip_event_count > 0 {
-        println!("   = = == = = == MEOW");
         self.skip_event_count -= 1;
         return;
       }
