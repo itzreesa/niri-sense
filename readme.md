@@ -5,11 +5,11 @@ integrate your toys with niri!
 </br>
 <img alt="GitHub Release" src="https://img.shields.io/github/v/release/itzreesa/niri-sense?style=flat-square&color=faa">
 <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/itzreesa/niri-sense?style=flat-square&color=fdf">
-<img alt="GitHub License" src="https://img.shields.io/github/license/itzreesa/niri-sense?style=flat-square&color=aaf">
+<img alt="GitHub License" src="https://img.shields.io/github/license/itzreesa/niri-sense?style=flat-square">
 </br>
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/itzreesa/niri-sense?style=flat-square&labelColor=4B8BBE&color=FFE873">
+<img alt="GitHub top language" src="https://img.shields.io/badge/rust-orange?style=flat-square&logo=rust">
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/itzreesa/niri-sense?style=flat-square&color=bfb">
-<img alt="Static Badge" src="https://img.shields.io/badge/made%20with-%3A3-d26?style=flat-square">
+<img alt="Colon 3 emoji badge" src="https://img.shields.io/badge/made%20with-%3A3-d26?style=flat-square">
 </br>
 </p>
 
