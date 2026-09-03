@@ -1,7 +1,8 @@
 [package]
-name = "sense"
-version = "0.1.0"
+name = "niri-sense"
+version = "1.0.0"
 edition = "2024"
+license-file = "LICENSE"
 
 [dependencies]
 buttplug_client = "11.0.0"
